@@ -30,6 +30,8 @@ def collect_product_data():
             'tracking': item.tracking,
             'property_stock_production': item.property_stock_production,
             'property_stock_inventory': item.property_stock_inventory,
+            'purchase_ok': item.purchase_ok,
+            'sale_ok': item.sale_ok,
         }
         item_data.append(item_info)
     return item_data
