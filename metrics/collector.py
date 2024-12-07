@@ -53,10 +53,7 @@ def metrics_generator():
             # Additional Metrics (potential)
            
             'active': user.active,  # Check if user account is active or inactive
-            'create_date': user.create_date,  # Date/Time when user account was created
-            'last_login': user.login_date,  # Date/Time of the last user login
-            'days_since_last_login': (fields.Datetime.now() - user.login_date).days if user.login_date else None,  # Calculate days since last login (handle potential null values)
-
+           
             # Additional Information (consider your specific needs)
             'phone': user.phone,
             'mobile': user.mobile,
