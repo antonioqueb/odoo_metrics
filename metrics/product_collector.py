@@ -40,7 +40,7 @@ def collect_product_data():
             'sale_ok': item.sale_ok,
             'inventory_value': inventory_value,
             'profit_margin': profit_margin,
-            'total_sales': total_sales,
+            
         }
         item_data.append(item_info)
     return item_data
