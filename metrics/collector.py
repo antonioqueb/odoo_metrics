@@ -96,6 +96,6 @@ def metrics_generator():
     }
 
     # Convert to JSON string
-    json_data = json.dumps(data)
+    json_data = json.dumps(data, default=str)
 
     return json_data
