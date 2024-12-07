@@ -51,7 +51,7 @@ def metrics_generator():
             'is_admin': user.has_group('base.group_system'),
 
             # Additional Metrics (potential)
-            'login_count': user.login_count,  # Track total login attempts
+           
             'active': user.active,  # Check if user account is active or inactive
             'create_date': user.create_date,  # Date/Time when user account was created
             'last_login': user.login_date,  # Date/Time of the last user login
