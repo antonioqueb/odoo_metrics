@@ -17,7 +17,7 @@ class MetricsAPI(http.Controller):
     @http.route('/metrics/products', auth='public', type='http', methods=['GET'])
     def get_products(self, **kwargs):
         product_data = product_collector.collect_product_data()
-        json_data = json.dumps(product_data, default=str)
+        json_data = json.dumps(product_data, default=str) # default=str sigue siendo buena práctica
         return Response(json_data, content_type='application/json; charset=utf-8')
 
     @http.route('/metrics', auth='public', type='http', methods=['GET'])  # Ruta combinada (opcional)

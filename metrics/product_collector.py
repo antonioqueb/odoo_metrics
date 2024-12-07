@@ -4,7 +4,7 @@ import json
 
 def collect_product_data():
     """
-    Collects data for product items.
+    Collects data for product items, serializing related fields.
     """
     inventory_items = http.request.env['product.product'].search([])
     item_data = []
@@ -18,18 +18,16 @@ def collect_product_data():
             'cost_price': item.standard_price,
             'sale_price': item.list_price,
             'barcode': item.barcode,
-            'taxes_id': item.taxes_id,
-            'category': item.categ_id.name,
+            'taxes_id': [{'id': tax.id, 'name': tax.name} for tax in item.taxes_id],
+            'category': {'id': item.categ_id.id, 'name': item.categ_id.name} if item.categ_id else None,
             'description_sale': item.description_sale,
-            'barcode': item.barcode,
-            'default_code': item.default_code,
             'weight': item.weight,
             'volume': item.volume,
             'type': item.type,
-            'route_ids': item.route_ids,
+            'route_ids': [{'id': route.id, 'name': route.name} for route in item.route_ids],
             'tracking': item.tracking,
-            'property_stock_production': item.property_stock_production,
-            'property_stock_inventory': item.property_stock_inventory,
+            'property_stock_production': {'id': item.property_stock_production.id, 'name': item.property_stock_production.name} if item.property_stock_production else None,
+            'property_stock_inventory': {'id': item.property_stock_inventory.id, 'name': item.property_stock_inventory.name} if item.property_stock_inventory else None,
             'purchase_ok': item.purchase_ok,
             'sale_ok': item.sale_ok,
         }
