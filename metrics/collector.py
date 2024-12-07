@@ -2,6 +2,7 @@
 from odoo import api, fields, models
 from odoo.http import request
 import json
+import base64
 
 
 def metrics_generator():
@@ -82,7 +83,7 @@ def metrics_generator():
             'default_code': item.default_code,
             'weight': item.weight,
             'volume': item.volume,
-            'image': item.image_1920, # Imagen del producto
+            'image': base64.b64encode(item.image_1920).decode('utf-8') if item.image_1920 else None,
             'type': item.type, # Tipo de producto ('product', 'service', 'consu')
             # ... más campos aquí
         }
