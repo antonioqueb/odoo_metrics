@@ -17,12 +17,6 @@ def collect_product_data():
         # Calcula el margen de beneficio
         profit_margin = (item.list_price - item.standard_price) / item.list_price if item.list_price else 0
 
-        # Calcula las ventas totales (requiere el módulo sale_management)
-        total_sales = 0
-        if 'sale_management' in request.registry.loaded_modules:  # <-- Corrección aquí
-            sales_lines = request.env['sale.order.line'].search([('product_id', '=', item.id)])
-            total_sales = sum(sales_lines.mapped('price_subtotal'))
-
 
         item_info = {
             'id': item.id,
