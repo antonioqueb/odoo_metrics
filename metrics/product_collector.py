@@ -12,6 +12,7 @@ def collect_product_data():
     for item in inventory_items:
         item_info = {
             'id': item.id,
+            'default_code': item.default_code,
             'name': item.name,
             'quantity_on_hand': item.qty_available,
             'cost_price': item.standard_price,
