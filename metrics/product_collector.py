@@ -1,5 +1,6 @@
 # metrics/product_collector.py
-from odoo import http, api
+from odoo import http
+from odoo.http import request
 import json
 
 def collect_product_data():
@@ -18,8 +19,8 @@ def collect_product_data():
 
         # Calcula las ventas totales (requiere el módulo sale_management)
         total_sales = 0
-        if http.request.env.modules.get('sale_management'):
-            sales_lines = http.request.env['sale.order.line'].search([('product_id', '=', item.id)])
+        if 'sale_management' in request.env.registry.loaded_modules:  # <-- Corrección aquí
+            sales_lines = request.env['sale.order.line'].search([('product_id', '=', item.id)])
             total_sales = sum(sales_lines.mapped('price_subtotal'))
 
 
