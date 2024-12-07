@@ -3,16 +3,11 @@ from odoo.http import request
 import json
 
 def metrics_generator():
-  registry = CollectorRegistry()
-
-  # ... Your existing code for defining gauges ...
-
   # Build JSON data
   data = {
-    "odoo_active_users": active_users.get(),
-    "odoo_recent_sales": recent_sales.get(),
-    "odoo_inventory_items": inventory_items.get(),
-    # Add more metrics to the data dictionary
+    "odoo_active_users": len(request.env['res.users'].search([('active', '=', True)])),
+    "odoo_recent_sales": len(request.env['sale.order'].search([('date_order', '>', (fields.Datetime.now() - fields.Datetime.delta(days=1)).strftime('%Y-%m-%d %H:%M:%S'))])),
+    "odoo_inventory_items": len(request.env['product.product'].search([]))
   }
 
   # Convert to JSON string
