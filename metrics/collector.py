@@ -3,15 +3,21 @@ from odoo.http import request
 import json
 
 def metrics_generator():
-    # Active Users
+    # Active Users with Last Activity (if mail module is installed)
     active_users = request.env['res.users'].search([('active', '=', True)])
     user_data = []
     for user in active_users:
+        # Check for mail module and access last_activity_date
+        if request.env.modules.get('mail'):
+            last_activity = user.sudo().last_activity_date
+        else:
+            last_activity = None  # Set to None if mail module is not installed
+
         user_info = {
             'id': user.id,
             'name': user.name,
             'email': user.email,
-            'last_login': user.last_login,
+            'last_activity': last_activity,
             # Add more fields as needed: groups, roles, etc.
         }
         user_data.append(user_info)
