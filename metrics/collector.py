@@ -86,12 +86,27 @@ def metrics_generator():
             'type': item.type, # Tipo de producto ('product', 'service', 'consu')
             # ... más campos aquí
         }
-        item_data.append(item_info)
+    item_data.append(item_info)
+
+        # Product Templates (product.template)
+    template_data = []
+    for template in request.env['product.template'].search([]):
+        template_info = {
+            'id': template.id,
+            'name': template.name,
+            'category': template.categ_id.name if template.categ_id else None,
+            'description_sale': template.description_sale,
+            'list_price': template.list_price,
+            'standard_price': template.standard_price,
+            'type': template.type,
+        }
+    template_data.append(template_info)
 
     # Build JSON data
     data = {
         "odoo_active_users": user_data,
-        "odoo_inventory_items": item_data
+        "odoo_inventory_items": item_data,
+        "odoo_product_templates": template_data 
     }
 
     # Convert to JSON string
