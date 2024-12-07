@@ -1,0 +1,1 @@
+# Este archivo puede estar vacío si no hay modelos personalizados en este módulo.
