@@ -17,6 +17,8 @@ def collect_product_data():
             'quantity_on_hand': item.qty_available,
             'cost_price': item.standard_price,
             'sale_price': item.list_price,
+            'barcode': item.barcode,
+            'taxes_id': item.taxes_id,
             'category': item.categ_id.name,
             'description_sale': item.description_sale,
             'barcode': item.barcode,
@@ -24,6 +26,10 @@ def collect_product_data():
             'weight': item.weight,
             'volume': item.volume,
             'type': item.type,
+            'route_ids': item.route_ids,
+            'tracking': item.tracking,
+            'property_stock_production': item.property_stock_production,
+            'property_stock_inventory': item.property_stock_inventory,
         }
         item_data.append(item_info)
     return item_data
