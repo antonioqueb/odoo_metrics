@@ -19,7 +19,7 @@ def collect_product_data():
 
         # Calcula las ventas totales (requiere el módulo sale_management)
         total_sales = 0
-        if 'sale_management' in request.env.registry.loaded_modules:  # <-- Corrección aquí
+        if 'sale_management' in request.registry.loaded_modules:  # <-- Corrección aquí
             sales_lines = request.env['sale.order.line'].search([('product_id', '=', item.id)])
             total_sales = sum(sales_lines.mapped('price_subtotal'))
 
