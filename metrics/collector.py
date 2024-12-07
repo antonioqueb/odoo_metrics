@@ -77,7 +77,6 @@ def metrics_generator():
             'cost_price': item.standard_price,
             'sale_price': item.list_price,
             'category': item.categ_id.name,  # Nombre de la categoría
-            'sellers': [(seller.name.name if seller.name else None, seller.price, seller.min_qty) for seller in item.seller_ids],
             'description_sale': item.description_sale,
             'barcode': item.barcode,
             'default_code': item.default_code,
