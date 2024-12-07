@@ -48,7 +48,6 @@ def metrics_generator():
             'preferred_language': user.lang,  # Assuming preferred_language is an alias for lang
 
             # Security and Administration
-            'notification_email': user.notification_email,
             'is_admin': user.has_group('base.group_system'),
 
             # Additional Metrics (potential)
