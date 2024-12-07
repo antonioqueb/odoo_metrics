@@ -30,13 +30,42 @@ def metrics_generator():
             # Handle potential errors like missing 'modules' attribute or missing mail module
             last_activity = None
             print(f"Error accessing last_activity for user {user.name}. Mail module might be missing.")
-
         user_info = {
             'id': user.id,
             'name': user.name,
             'email': user.email,
-            'last_activity': last_activity,
-            # Add more fields as needed: groups, roles, etc.
+            'last_activity': last_activity,  # Assuming you have this defined elsewhere
+
+            # Company Information
+            'company_name': user.company_id.name if user.company_id else None,
+
+            # User Groups and Permissions
+            'group_names': [group.name for group in user.groups_id],
+            'can_access_frontend': user.has_group('base.group_user'),
+
+            # Localization and Preferences
+            'lang': user.lang,
+            'preferred_language': user.lang,  # Assuming preferred_language is an alias for lang
+
+            # Security and Administration
+            'last_password_change': user.password_change,
+            'notification_email': user.notification_email,
+            'is_admin': user.has_group('base.group_system'),
+
+            # Additional Metrics (potential)
+            'login_count': user.login_count,  # Track total login attempts
+            'active': user.active,  # Check if user account is active or inactive
+            'create_date': user.create_date,  # Date/Time when user account was created
+            'last_login': user.login_date,  # Date/Time of the last user login
+            'days_since_last_login': (fields.Datetime.now() - user.login_date).days if user.login_date else None,  # Calculate days since last login (handle potential null values)
+
+            # Additional Information (consider your specific needs)
+            'phone': user.phone,
+            'mobile': user.mobile,
+            'address': user.address_id.name if user.address_id else None,  # Assuming address_id points to a res.partner
+            'department': user.department_id.name if user.department_id else None,
+            'job_title': user.job_title,  
+            'signature': user.signature,  # Assuming a signature field exists
         }
         user_data.append(user_info)
 
