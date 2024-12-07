@@ -76,7 +76,16 @@ def metrics_generator():
             'quantity_on_hand': item.qty_available,
             'cost_price': item.standard_price,
             'sale_price': item.list_price,
-            # Add more fields as needed: categories, suppliers, etc.
+            'category': item.categ_id.name,  # Nombre de la categoría
+            'sellers': [(seller.name.name, seller.price, seller.min_qty) for seller in item.seller_ids], # Información de proveedores (nombre, precio, cantidad mínima)
+            'description_sale': item.description_sale,
+            'barcode': item.barcode,
+            'default_code': item.default_code,
+            'weight': item.weight,
+            'volume': item.volume,
+            'image': item.image_1920, # Imagen del producto
+            'type': item.type, # Tipo de producto ('product', 'service', 'consu')
+            # ... más campos aquí
         }
         item_data.append(item_info)
 
